@@ -1,0 +1,17 @@
+spring:
+  data:
+    dynamodb:
+      entity2ddl:
+        auto: create
+        readCapacity: 1
+        writeCapacity: 1
+
+aws:
+  region: eu-west-1
+  dynamodb:
+    endpoint: http://localhost:8000
+
+integration:
+  stormConsultancyQuotes:
+    url: http://quotes.stormconsultancy.co.uk
+    fullQuotesList: quotes.json
