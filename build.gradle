@@ -21,7 +21,8 @@ repositories {
 def versions = [
         awsJavaSdk        : '1.12.192',
         springDataDynamoDb: '5.2.5',
-        testcontainers    : '1.16.3'
+        mapStruct         : '1.4.2.Final',
+        testcontainers    : '1.16.3',
 ]
 
 dependencies {
@@ -35,6 +36,7 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     annotationProcessor "org.projectlombok:lombok"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${versions.mapStruct}"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:testcontainers:${versions.testcontainers}"
