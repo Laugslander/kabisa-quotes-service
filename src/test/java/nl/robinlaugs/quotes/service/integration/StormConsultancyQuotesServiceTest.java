@@ -5,7 +5,8 @@ import nl.robinlaugs.quotes.config.properties.StormConsultancyQuotesProperties;
 import nl.robinlaugs.quotes.data.QuoteRepository;
 import nl.robinlaugs.quotes.data.model.Quote;
 import nl.robinlaugs.quotes.dto.QuoteDto;
-import nl.robinlaugs.quotes.dto.mapper.QuoteMapper;
+import nl.robinlaugs.quotes.dto.StormConsultancyQuoteDto;
+import nl.robinlaugs.quotes.dto.mapper.StormConsultancyQuoteMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +32,7 @@ class StormConsultancyQuotesServiceTest {
     private QuoteRepository quoteRepository;
 
     @Mock
-    private QuoteMapper quoteMapper;
+    private StormConsultancyQuoteMapper stormConsultancyQuoteMapper;
 
     @Mock
     private StormConsultancyQuotesProperties stormConsultancyQuotesProperties;
@@ -50,12 +51,13 @@ class StormConsultancyQuotesServiceTest {
 
     @Test
     public void retrieveAndStoreQuotes() throws URISyntaxException {
-        QuoteDto quoteDto = TestObjectFactory.createQuoteDto();
+        StormConsultancyQuoteDto stormConsultancyQuoteDto = TestObjectFactory.createStormConsultancyQuoteDto();
         Quote quote = TestObjectFactory.createQuote();
 
-        when(restTemplate.getForObject(any(URI.class), eq(QuoteDto[].class))).thenReturn(new QuoteDto[]{quoteDto});
+        when(restTemplate.getForObject(any(URI.class), eq(StormConsultancyQuoteDto[].class)))
+                .thenReturn(new StormConsultancyQuoteDto[]{stormConsultancyQuoteDto});
 
-        when(quoteMapper.mapDtoToEntity(quoteDto)).thenReturn(quote);
+        when(stormConsultancyQuoteMapper.mapDtoToEntity(stormConsultancyQuoteDto)).thenReturn(quote);
 
         stormConsultancyQuotesService.retrieveAndStoreQuotes();
 

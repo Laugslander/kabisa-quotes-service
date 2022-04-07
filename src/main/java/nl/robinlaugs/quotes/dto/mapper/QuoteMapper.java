@@ -9,6 +9,4 @@ public interface QuoteMapper {
 
     QuoteDto mapEntityToDto(Quote entity);
 
-    Quote mapDtoToEntity(QuoteDto dto);
-
 }

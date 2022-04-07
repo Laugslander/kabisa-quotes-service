@@ -2,6 +2,7 @@ package nl.robinlaugs.quotes;
 
 import nl.robinlaugs.quotes.data.model.Quote;
 import nl.robinlaugs.quotes.dto.QuoteDto;
+import nl.robinlaugs.quotes.dto.StormConsultancyQuoteDto;
 
 public class TestObjectFactory {
 
@@ -17,7 +18,11 @@ public class TestObjectFactory {
     }
 
     public static QuoteDto createQuoteDto() {
-        return new QuoteDto("author", "quote");
+        return new QuoteDto("id", "author", "quote");
+    }
+
+    public static StormConsultancyQuoteDto createStormConsultancyQuoteDto() {
+        return new StormConsultancyQuoteDto("id", "author", "quote");
     }
 
 }
