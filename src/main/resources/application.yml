@@ -15,3 +15,12 @@ integration:
   stormConsultancyQuotes:
     url: http://quotes.stormconsultancy.co.uk
     fullQuotesList: quotes.json
+
+  twitter4J:
+    enabled: false
+    debug: false
+    oauth:
+      consumerKey: consumerKey
+      consumerSecret: consumerSecret
+      accessToken: accessToken
+      accessTokenSecret: accessTokenSecret

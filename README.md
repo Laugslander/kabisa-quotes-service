@@ -9,7 +9,13 @@ from [Storm Consultancy's Programming Quotes API](http://quotes.stormconsultancy
 - Java 17
 - Docker
 
-### Usage
+### Optional setup
+
+Optionally, enable Twitter integration by configuring Twitter4J properties in `application.yml` with keys and tokens,
+obtained from the [Twitter Developer Portal](https://developer.twitter.com). When not configured, the application runs
+without Twitter integration.
+
+### Start
 
 1. Run DynamoDB locally with Docker:
    ```
@@ -20,3 +26,11 @@ from [Storm Consultancy's Programming Quotes API](http://quotes.stormconsultancy
    ```
    ./gradlew bootRun
    ```
+
+### Functionality
+
+- [x] Retrieve random quotes
+- [x] Fetch quotes from external service
+- [x] Share quotes on Twitter
+
+Refer to the Postman collection in the `postman` folder for all available REST endpoints. 

@@ -14,17 +14,19 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class StormConsultancyQuotesService {
+public class StormConsultancyQuotesService implements ExternalQuotesService {
 
     private final QuoteRepository quoteRepository;
     private final StormConsultancyQuoteMapper stormConsultancyQuoteMapper;
     private final StormConsultancyQuotesProperties stormConsultancyQuotesProperties;
     private final RestTemplate restTemplate;
 
+    @Override
     public void retrieveAndStoreQuotes() throws URISyntaxException {
         List<Quote> quotes = retrieveQuotes();
 
@@ -39,12 +41,13 @@ public class StormConsultancyQuotesService {
                 .build()
                 .normalize();
 
-        var quotes = restTemplate.getForObject(uri, StormConsultancyQuoteDto[].class);
-        if (quotes == null || quotes.length == 0) {
-            throw new RuntimeException("Unable to retrieve quotes from Storm Consultancy Quotes");
-        }
+        StormConsultancyQuoteDto[] response = restTemplate.getForObject(uri, StormConsultancyQuoteDto[].class);
 
-        return Arrays.stream(quotes)
+        List<StormConsultancyQuoteDto> quotes = Optional.ofNullable(response)
+                .map(Arrays::asList)
+                .orElseThrow(() -> new RuntimeException("Unable to retrieve quotes from Storm Consultancy Quotes"));
+
+        return quotes.stream()
                 .peek(quote -> log.debug("Retrieved quote: {}", quote))
                 .map(stormConsultancyQuoteMapper::mapDtoToEntity)
                 .toList();

@@ -1,7 +1,7 @@
 package nl.robinlaugs.quotes.service;
 
 import lombok.RequiredArgsConstructor;
-import nl.robinlaugs.quotes.service.integration.StormConsultancyQuotesService;
+import nl.robinlaugs.quotes.service.integration.ExternalQuotesService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class QuoteImportRunner implements CommandLineRunner {
 
-    private final StormConsultancyQuotesService stormConsultancyQuotesService;
+    private final ExternalQuotesService externalQuotesService;
 
     @Override
     public void run(String... args) throws Exception {
-        stormConsultancyQuotesService.retrieveAndStoreQuotes();
+        externalQuotesService.retrieveAndStoreQuotes();
     }
 
 }

@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "5f88a44a-7037-4c3f-9420-eeaaf1622750",
+		"name": "Kabisa Quotes Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/$random",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/$random",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"$random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/:id",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/:id/$share",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/:id/$share",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						":id",
+						"$share"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

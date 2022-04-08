@@ -34,7 +34,7 @@ class QuoteControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void getRandomQuote() throws Exception {
+    public void get() throws Exception {
         Quote quote = TestObjectFactory.createQuote();
         QuoteDto quoteDto = TestObjectFactory.createQuoteDto();
 
@@ -50,6 +50,55 @@ class QuoteControllerTest {
                 .andExpect(content().json(json));
 
         verify(quoteService).getRandomQuote();
+    }
+
+    @Test
+    public void getRandomQuote() throws Exception {
+        Quote quote = TestObjectFactory.createQuote();
+        QuoteDto quoteDto = TestObjectFactory.createQuoteDto();
+
+        when(quoteService.getRandomQuote()).thenReturn(Optional.of(quote));
+
+        when(quoteMapper.mapEntityToDto(quote)).thenReturn(quoteDto);
+
+        String json = new ObjectMapper().writeValueAsString(quoteDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/$random"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON))
+                .andExpect(content().json(json));
+
+        verify(quoteService).getRandomQuote();
+    }
+
+    @Test
+    public void getById() throws Exception {
+        String id = "id";
+        Quote quote = TestObjectFactory.createQuote();
+        QuoteDto quoteDto = TestObjectFactory.createQuoteDto();
+
+        when(quoteService.getById(id)).thenReturn(Optional.of(quote));
+
+        when(quoteMapper.mapEntityToDto(quote)).thenReturn(quoteDto);
+
+        String json = new ObjectMapper().writeValueAsString(quoteDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/" + id))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON))
+                .andExpect(content().json(json));
+
+        verify(quoteService).getById(id);
+    }
+
+    @Test
+    public void shareQuote() throws Exception {
+        String id = "id";
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/" + id + "/$share"))
+                .andExpect(status().isOk());
+
+        verify(quoteService).shareQuote(id);
     }
 
 }
