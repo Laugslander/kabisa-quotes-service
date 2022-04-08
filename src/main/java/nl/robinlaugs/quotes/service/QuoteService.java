@@ -25,9 +25,27 @@ public class QuoteService {
     }
 
     public void shareQuote(String id) {
-        Quote quote = quoteRepository.findById(id).orElseThrow(() -> new QuoteNotFoundException(id));
+        Quote quote = getQuote(id);
 
         twitterService.sendTweet(quote);
+    }
+
+    public Quote upvoteQuote(String id) {
+        Quote quote = getQuote(id);
+        quote.upvote();
+
+        return quoteRepository.save(quote);
+    }
+
+    public Quote downvoteQuote(String id) {
+        Quote quote = getQuote(id);
+        quote.downvote();
+
+        return quoteRepository.save(quote);
+    }
+
+    private Quote getQuote(String id) {
+        return quoteRepository.findById(id).orElseThrow(() -> new QuoteNotFoundException(id));
     }
 
 }

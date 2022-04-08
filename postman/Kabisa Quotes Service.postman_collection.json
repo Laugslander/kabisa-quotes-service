@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "/$random",
+			"name": "{{host}}/$random",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -23,7 +23,7 @@
 			"response": []
 		},
 		{
-			"name": "/:id",
+			"name": "{{host}}/:id",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -46,7 +46,7 @@
 			"response": []
 		},
 		{
-			"name": "/:id/$share",
+			"name": "{{host}}/:id/$share",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -58,6 +58,54 @@
 					"path": [
 						":id",
 						"$share"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{host}}/:id/$vote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/:id/$vote",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						":id",
+						"$vote"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{host}}/:id/$vote",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/:id/$vote",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						":id",
+						"$vote"
 					],
 					"variable": [
 						{

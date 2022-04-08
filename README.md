@@ -32,5 +32,6 @@ without Twitter integration.
 - [x] Retrieve random quotes
 - [x] Fetch quotes from external service
 - [x] Share quotes on Twitter
+- [x] Upvote and downvote quotes
 
 Refer to the Postman collection in the `postman` folder for all available REST endpoints. 

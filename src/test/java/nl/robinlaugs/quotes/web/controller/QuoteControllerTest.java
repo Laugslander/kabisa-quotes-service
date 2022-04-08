@@ -101,4 +101,24 @@ class QuoteControllerTest {
         verify(quoteService).shareQuote(id);
     }
 
+    @Test
+    public void upvoteQuote() throws Exception {
+        String id = "id";
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/" + id + "/$vote"))
+                .andExpect(status().isOk());
+
+        verify(quoteService).upvoteQuote(id);
+    }
+
+    @Test
+    public void downvoteQuote() throws Exception {
+        String id = "id";
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/" + id + "/$vote"))
+                .andExpect(status().isOk());
+
+        verify(quoteService).downvoteQuote(id);
+    }
+
 }

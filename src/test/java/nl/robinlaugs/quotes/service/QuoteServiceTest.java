@@ -86,4 +86,52 @@ class QuoteServiceTest {
         assertThrows(QuoteNotFoundException.class, () -> quoteService.shareQuote(id));
     }
 
+    @Test
+    public void upvoteQuote() {
+        String id = "id";
+
+        Quote quote = TestObjectFactory.createQuote();
+        quote.setId(id);
+
+        when(quoteRepository.findById(quote.getId())).thenReturn(Optional.of(quote));
+
+        quoteService.upvoteQuote(id);
+
+        verify(quoteRepository).findById(quote.getId());
+        verify(quoteRepository).save(quote);
+    }
+
+    @Test
+    public void upvoteQuote_unknownId() {
+        String id = "unknown";
+
+        when(quoteRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(QuoteNotFoundException.class, () -> quoteService.upvoteQuote(id));
+    }
+
+    @Test
+    public void downvoteQuote() {
+        String id = "id";
+
+        Quote quote = TestObjectFactory.createQuote();
+        quote.setId(id);
+
+        when(quoteRepository.findById(quote.getId())).thenReturn(Optional.of(quote));
+
+        quoteService.downvoteQuote(id);
+
+        verify(quoteRepository).findById(quote.getId());
+        verify(quoteRepository).save(quote);
+    }
+
+    @Test
+    public void downvoteQuote_unknownId() {
+        String id = "unknown";
+
+        when(quoteRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(QuoteNotFoundException.class, () -> quoteService.upvoteQuote(id));
+    }
+
 }

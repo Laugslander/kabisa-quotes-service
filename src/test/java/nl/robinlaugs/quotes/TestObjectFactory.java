@@ -14,11 +14,12 @@ public class TestObjectFactory {
         return Quote.builder()
                 .author("author")
                 .quote(quote)
+                .votes(5)
                 .build();
     }
 
     public static QuoteDto createQuoteDto() {
-        return new QuoteDto("id", "author", "quote");
+        return new QuoteDto("id", "author", "quote", 5);
     }
 
     public static StormConsultancyQuoteDto createStormConsultancyQuoteDto() {

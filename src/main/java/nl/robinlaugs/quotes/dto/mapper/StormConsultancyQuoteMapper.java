@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 public interface StormConsultancyQuoteMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "votes", ignore = true)
     Quote mapDtoToEntity(StormConsultancyQuoteDto dto);
 
 }

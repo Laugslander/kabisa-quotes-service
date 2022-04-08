@@ -1,10 +1,12 @@
 package nl.robinlaugs.quotes.web.controller;
 
 import lombok.RequiredArgsConstructor;
+import nl.robinlaugs.quotes.data.model.Quote;
 import nl.robinlaugs.quotes.dto.QuoteDto;
 import nl.robinlaugs.quotes.dto.mapper.QuoteMapper;
 import nl.robinlaugs.quotes.service.QuoteService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +47,22 @@ public class QuoteController {
         quoteService.shareQuote(id);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/$vote")
+    ResponseEntity<?> upvoteQuote(@PathVariable String id) {
+        Quote quote = quoteService.upvoteQuote(id);
+        QuoteDto dto = quoteMapper.mapEntityToDto(quote);
+
+        return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping("/{id}/$vote")
+    ResponseEntity<?> downvoteQuote(@PathVariable String id) {
+        Quote quote = quoteService.downvoteQuote(id);
+        QuoteDto dto = quoteMapper.mapEntityToDto(quote);
+
+        return ResponseEntity.ok(dto);
     }
 
 }

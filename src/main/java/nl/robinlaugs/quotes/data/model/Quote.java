@@ -26,4 +26,15 @@ public class Quote {
     @DynamoDBAttribute
     private String quote;
 
+    @DynamoDBAttribute
+    private int votes;
+
+    public void upvote() {
+        votes++;
+    }
+
+    public void downvote() {
+        votes--;
+    }
+
 }
