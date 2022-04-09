@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import nl.robinlaugs.quotes.data.QuoteRepository;
 import nl.robinlaugs.quotes.data.model.Quote;
 import nl.robinlaugs.quotes.service.exception.QuoteNotFoundException;
-import nl.robinlaugs.quotes.service.integration.TwitterService;
+import nl.robinlaugs.quotes.service.integration.twitter.TwitterService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

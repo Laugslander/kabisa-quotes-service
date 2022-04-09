@@ -4,7 +4,7 @@ import nl.robinlaugs.quotes.TestObjectFactory;
 import nl.robinlaugs.quotes.data.QuoteRepository;
 import nl.robinlaugs.quotes.data.model.Quote;
 import nl.robinlaugs.quotes.service.exception.QuoteNotFoundException;
-import nl.robinlaugs.quotes.service.integration.TwitterServiceEnabled;
+import nl.robinlaugs.quotes.service.integration.twitter.TwitterServiceEnabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,7 +32,7 @@ class QuoteServiceTest {
     private QuoteService quoteService;
 
     @Test
-    public void getById() {
+    void getById() {
         String id = "id";
 
         Quote quote = TestObjectFactory.createQuote();
@@ -49,7 +49,7 @@ class QuoteServiceTest {
     }
 
     @Test
-    public void getRandomQuote() {
+    void getRandomQuote() {
         Quote quote = TestObjectFactory.createQuote();
 
         when(quoteRepository.getRandomQuote()).thenReturn(Optional.of(quote));
@@ -63,7 +63,7 @@ class QuoteServiceTest {
     }
 
     @Test
-    public void shareQuote() {
+    void shareQuote() {
         String id = "id";
 
         Quote quote = TestObjectFactory.createQuote();
@@ -78,7 +78,7 @@ class QuoteServiceTest {
     }
 
     @Test
-    public void shareQuote_unknownId() {
+    void shareQuote_unknownId() {
         String id = "unknown";
 
         when(quoteRepository.findById(id)).thenReturn(Optional.empty());
@@ -87,7 +87,7 @@ class QuoteServiceTest {
     }
 
     @Test
-    public void upvoteQuote() {
+    void upvoteQuote() {
         String id = "id";
 
         Quote quote = TestObjectFactory.createQuote();
@@ -102,7 +102,7 @@ class QuoteServiceTest {
     }
 
     @Test
-    public void upvoteQuote_unknownId() {
+    void upvoteQuote_unknownId() {
         String id = "unknown";
 
         when(quoteRepository.findById(id)).thenReturn(Optional.empty());
@@ -111,7 +111,7 @@ class QuoteServiceTest {
     }
 
     @Test
-    public void downvoteQuote() {
+    void downvoteQuote() {
         String id = "id";
 
         Quote quote = TestObjectFactory.createQuote();
@@ -126,7 +126,7 @@ class QuoteServiceTest {
     }
 
     @Test
-    public void downvoteQuote_unknownId() {
+    void downvoteQuote_unknownId() {
         String id = "unknown";
 
         when(quoteRepository.findById(id)).thenReturn(Optional.empty());

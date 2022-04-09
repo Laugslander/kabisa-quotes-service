@@ -1,4 +1,4 @@
-package nl.robinlaugs.quotes.service.integration;
+package nl.robinlaugs.quotes.service.integration.twitter;
 
 import nl.robinlaugs.quotes.TestObjectFactory;
 import nl.robinlaugs.quotes.data.model.Quote;
@@ -17,7 +17,7 @@ class TwitterServiceDisabledTest {
     private TwitterServiceDisabled twitterService;
 
     @Test
-    public void sendTweet() {
+    void sendTweet() {
         Quote quote = TestObjectFactory.createQuote();
 
         assertThrows(TwitterIntegrationDisabledException.class, () -> twitterService.sendTweet(quote));

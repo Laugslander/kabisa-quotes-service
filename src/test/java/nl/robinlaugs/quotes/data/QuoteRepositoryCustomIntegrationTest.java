@@ -19,7 +19,11 @@ class QuoteRepositoryCustomIntegrationTest extends BaseDynamoDbIntegrationTest {
     @Test
     void getRandomQuote() {
         List<Quote> quotes = IntStream.rangeClosed(1, 3)
-                .mapToObj(i -> TestObjectFactory.createQuote("quote " + i))
+                .mapToObj(i -> {
+                    Quote quote = TestObjectFactory.createQuote();
+                    quote.setQuote("quote " + i);
+                    return quote;
+                })
                 .toList();
 
         quoteRepository.saveAll(quotes);

@@ -1,12 +1,11 @@
-package nl.robinlaugs.quotes.service.integration;
+package nl.robinlaugs.quotes.service.integration.externalquotes;
 
 import nl.robinlaugs.quotes.TestObjectFactory;
 import nl.robinlaugs.quotes.config.properties.StormConsultancyQuotesProperties;
 import nl.robinlaugs.quotes.data.QuoteRepository;
 import nl.robinlaugs.quotes.data.model.Quote;
-import nl.robinlaugs.quotes.dto.QuoteDto;
 import nl.robinlaugs.quotes.dto.StormConsultancyQuoteDto;
-import nl.robinlaugs.quotes.dto.mapper.StormConsultancyQuoteMapper;
+import nl.robinlaugs.quotes.dto.mapper.QuoteMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,13 +25,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class StormConsultancyQuotesServiceTest {
+class StormConsultancyExternalQuotesServiceTest {
 
     @Mock
     private QuoteRepository quoteRepository;
 
     @Mock
-    private StormConsultancyQuoteMapper stormConsultancyQuoteMapper;
+    private QuoteMapper quoteMapper;
 
     @Mock
     private StormConsultancyQuotesProperties stormConsultancyQuotesProperties;
@@ -41,7 +40,7 @@ class StormConsultancyQuotesServiceTest {
     private RestTemplate restTemplate;
 
     @InjectMocks
-    private StormConsultancyQuotesService stormConsultancyQuotesService;
+    private StormConsultancyExternalQuotesService stormConsultancyExternalQuotesService;
 
     @BeforeEach
     void setUp() {
@@ -50,32 +49,32 @@ class StormConsultancyQuotesServiceTest {
     }
 
     @Test
-    public void retrieveAndStoreQuotes() throws URISyntaxException {
+    void retrieveAndStoreQuotes() throws URISyntaxException {
         StormConsultancyQuoteDto stormConsultancyQuoteDto = TestObjectFactory.createStormConsultancyQuoteDto();
         Quote quote = TestObjectFactory.createQuote();
 
         when(restTemplate.getForObject(any(URI.class), eq(StormConsultancyQuoteDto[].class)))
                 .thenReturn(new StormConsultancyQuoteDto[]{stormConsultancyQuoteDto});
 
-        when(stormConsultancyQuoteMapper.mapDtoToEntity(stormConsultancyQuoteDto)).thenReturn(quote);
+        when(quoteMapper.map(stormConsultancyQuoteDto)).thenReturn(quote);
 
-        stormConsultancyQuotesService.retrieveAndStoreQuotes();
+        stormConsultancyExternalQuotesService.retrieveAndStoreQuotes();
 
         verify(quoteRepository).saveAll(List.of(quote));
     }
 
     @Test
-    public void retrieveAndStoreQuotes_nullResponse() {
-        when(restTemplate.getForObject(any(URI.class), eq(QuoteDto[].class))).thenReturn(null);
+    void retrieveAndStoreQuotes_nullResponse() {
+        when(restTemplate.getForObject(any(URI.class), eq(StormConsultancyQuoteDto[].class))).thenReturn(null);
 
-        assertThrows(RuntimeException.class, () -> stormConsultancyQuotesService.retrieveAndStoreQuotes());
+        assertThrows(RuntimeException.class, () -> stormConsultancyExternalQuotesService.retrieveAndStoreQuotes());
     }
 
     @Test
-    public void retrieveAndStoreQuotes_emptyResponse() {
-        when(restTemplate.getForObject(any(URI.class), eq(QuoteDto[].class))).thenReturn(new QuoteDto[0]);
+    void retrieveAndStoreQuotes_emptyResponse() {
+        when(restTemplate.getForObject(any(URI.class), eq(StormConsultancyQuoteDto[].class))).thenReturn(new StormConsultancyQuoteDto[0]);
 
-        assertThrows(RuntimeException.class, () -> stormConsultancyQuotesService.retrieveAndStoreQuotes());
+        assertThrows(RuntimeException.class, () -> stormConsultancyExternalQuotesService.retrieveAndStoreQuotes());
     }
 
 }

@@ -1,4 +1,4 @@
-package nl.robinlaugs.quotes.service.integration;
+package nl.robinlaugs.quotes.service.integration.twitter;
 
 import nl.robinlaugs.quotes.TestObjectFactory;
 import nl.robinlaugs.quotes.data.model.Quote;
@@ -28,7 +28,7 @@ class TwitterServiceEnabledTest {
     private TwitterServiceEnabled twitterService;
 
     @Test
-    public void sendTweet() throws TwitterException {
+    void sendTweet() throws TwitterException {
         Quote quote = TestObjectFactory.createQuote();
         String text = String.format("'%s' - %s", quote.getQuote(), quote.getAuthor());
 

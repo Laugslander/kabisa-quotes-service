@@ -7,13 +7,9 @@ import nl.robinlaugs.quotes.dto.StormConsultancyQuoteDto;
 public class TestObjectFactory {
 
     public static Quote createQuote() {
-        return createQuote("quote");
-    }
-
-    public static Quote createQuote(String quote) {
         return Quote.builder()
                 .author("author")
-                .quote(quote)
+                .quote("quote")
                 .votes(5)
                 .build();
     }

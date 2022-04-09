@@ -1,4 +1,4 @@
-package nl.robinlaugs.quotes.service.integration;
+package nl.robinlaugs.quotes.service.integration.externalquotes;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,7 +6,7 @@ import nl.robinlaugs.quotes.config.properties.StormConsultancyQuotesProperties;
 import nl.robinlaugs.quotes.data.QuoteRepository;
 import nl.robinlaugs.quotes.data.model.Quote;
 import nl.robinlaugs.quotes.dto.StormConsultancyQuoteDto;
-import nl.robinlaugs.quotes.dto.mapper.StormConsultancyQuoteMapper;
+import nl.robinlaugs.quotes.dto.mapper.QuoteMapper;
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,15 +14,14 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class StormConsultancyQuotesService implements ExternalQuotesService {
+public class StormConsultancyExternalQuotesService implements ExternalQuotesService {
 
     private final QuoteRepository quoteRepository;
-    private final StormConsultancyQuoteMapper stormConsultancyQuoteMapper;
+    private final QuoteMapper quoteMapper;
     private final StormConsultancyQuotesProperties stormConsultancyQuotesProperties;
     private final RestTemplate restTemplate;
 
@@ -42,14 +41,13 @@ public class StormConsultancyQuotesService implements ExternalQuotesService {
                 .normalize();
 
         StormConsultancyQuoteDto[] response = restTemplate.getForObject(uri, StormConsultancyQuoteDto[].class);
+        if (response == null || response.length == 0) {
+            throw new RuntimeException("Unable to retrieve quotes from Storm Consultancy Quotes");
+        }
 
-        List<StormConsultancyQuoteDto> quotes = Optional.ofNullable(response)
-                .map(Arrays::asList)
-                .orElseThrow(() -> new RuntimeException("Unable to retrieve quotes from Storm Consultancy Quotes"));
-
-        return quotes.stream()
+        return Arrays.stream(response)
                 .peek(quote -> log.debug("Retrieved quote: {}", quote))
-                .map(stormConsultancyQuoteMapper::mapDtoToEntity)
+                .map(quoteMapper::map)
                 .toList();
     }
 

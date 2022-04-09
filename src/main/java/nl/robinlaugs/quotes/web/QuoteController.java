@@ -1,4 +1,4 @@
-package nl.robinlaugs.quotes.web.controller;
+package nl.robinlaugs.quotes.web;
 
 import lombok.RequiredArgsConstructor;
 import nl.robinlaugs.quotes.data.model.Quote;
@@ -29,7 +29,7 @@ public class QuoteController {
     @GetMapping("/$random")
     ResponseEntity<QuoteDto> getRandomQuote() {
         return quoteService.getRandomQuote()
-                .map(quoteMapper::mapEntityToDto)
+                .map(quoteMapper::map)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -37,7 +37,7 @@ public class QuoteController {
     @GetMapping("/{id}")
     ResponseEntity<QuoteDto> getById(@PathVariable String id) {
         return quoteService.getById(id)
-                .map(quoteMapper::mapEntityToDto)
+                .map(quoteMapper::map)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -52,7 +52,7 @@ public class QuoteController {
     @PostMapping("/{id}/$vote")
     ResponseEntity<?> upvoteQuote(@PathVariable String id) {
         Quote quote = quoteService.upvoteQuote(id);
-        QuoteDto dto = quoteMapper.mapEntityToDto(quote);
+        QuoteDto dto = quoteMapper.map(quote);
 
         return ResponseEntity.ok(dto);
     }
@@ -60,7 +60,7 @@ public class QuoteController {
     @DeleteMapping("/{id}/$vote")
     ResponseEntity<?> downvoteQuote(@PathVariable String id) {
         Quote quote = quoteService.downvoteQuote(id);
-        QuoteDto dto = quoteMapper.mapEntityToDto(quote);
+        QuoteDto dto = quoteMapper.map(quote);
 
         return ResponseEntity.ok(dto);
     }

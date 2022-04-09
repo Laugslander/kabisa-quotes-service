@@ -1,4 +1,4 @@
-package nl.robinlaugs.quotes.service.integration;
+package nl.robinlaugs.quotes.service.integration.twitter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

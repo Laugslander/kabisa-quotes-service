@@ -1,4 +1,4 @@
-package nl.robinlaugs.quotes.service.integration;
+package nl.robinlaugs.quotes.service.integration.twitter;
 
 import nl.robinlaugs.quotes.data.model.Quote;
 

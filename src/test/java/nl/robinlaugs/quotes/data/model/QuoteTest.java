@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class QuoteTest {
 
     @Test
-    public void upvote() {
+    void upvote() {
         Quote quote = TestObjectFactory.createQuote();
         int votes = quote.getVotes();
 
@@ -18,7 +18,7 @@ class QuoteTest {
     }
 
     @Test
-    public void downvote() {
+    void downvote() {
         Quote quote = TestObjectFactory.createQuote();
         int votes = quote.getVotes();
 

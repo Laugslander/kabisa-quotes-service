@@ -1,4 +1,4 @@
-package nl.robinlaugs.quotes.service.integration;
+package nl.robinlaugs.quotes.service.integration.externalquotes;
 
 public interface ExternalQuotesService {
 
