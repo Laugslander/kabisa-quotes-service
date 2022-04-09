@@ -3,6 +3,7 @@ package nl.robinlaugs.quotes.web;
 import nl.robinlaugs.quotes.dto.ExceptionDto;
 import nl.robinlaugs.quotes.service.exception.QuoteNotFoundException;
 import nl.robinlaugs.quotes.service.exception.TwitterIntegrationDisabledException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,7 +19,7 @@ public class QuoteControllerAdvice {
 
     @ExceptionHandler(TwitterIntegrationDisabledException.class)
     ResponseEntity<?> twitterIntegrationDisabledHandler(TwitterIntegrationDisabledException e) {
-        return ResponseEntity.unprocessableEntity()
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
                 .body(new ExceptionDto(e.getMessage()));
     }
 

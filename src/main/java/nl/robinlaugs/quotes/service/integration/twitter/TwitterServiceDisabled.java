@@ -14,7 +14,7 @@ public class TwitterServiceDisabled implements TwitterService {
 
     @Override
     public void sendTweet(Quote quote) {
-        log.info("Unable to send tweet because Twitter integration is disabled");
+        log.info("Unable to send Tweet because Twitter integration is disabled");
 
         throw new TwitterIntegrationDisabledException();
     }
