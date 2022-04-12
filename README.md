@@ -2,7 +2,9 @@
 
 The Kabisa Quotes Service is part of the Kabisa cloud native coding assignment. The application uses Amazon DynamoDB for
 data persistence. On startup, the application fetches programming quotes
-from [Storm Consultancy's Programming Quotes API](http://quotes.stormconsultancy.co.uk/api).
+from [Storm Consultancy's Programming Quotes API](http://quotes.stormconsultancy.co.uk/api). Refer to
+the [Kabisa Quotes Infrastructure](https://github.com/Laugslander/kabisa-quotes-infrastructure) repository for deploying
+the application to AWS using Terraform.
 
 ### Prerequisites
 
