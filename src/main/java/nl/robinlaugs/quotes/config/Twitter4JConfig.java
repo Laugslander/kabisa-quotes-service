@@ -16,7 +16,7 @@ public class Twitter4JConfig {
     private final Twitter4JProperties twitter4JProperties;
 
     @Bean
-    @ConditionalOnProperty("integration.twitter4j.enabled")
+    @ConditionalOnProperty(prefix = "integration.twitter4j", name = "enabled", havingValue = "true")
     public Twitter twitter() {
         var oauthProperties = twitter4JProperties.getOAuth();
 
@@ -30,4 +30,5 @@ public class Twitter4JConfig {
 
         return new TwitterFactory(configuration).getInstance();
     }
+
 }
